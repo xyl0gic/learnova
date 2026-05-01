@@ -1,53 +1,3 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kairos - Free Online Curriculum</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --cream:#FDFAF4;--warm-white:#FFF9F0;--ink:#1C1A14;--ink-soft:#4A4740;--ink-muted:#8A8680;
-  --amber:#E8A020;--amber-light:#FDE9B8;--amber-pale:#FFF4D9;--teal:#1D9E75;--teal-light:#E1F5EE;
-  --coral:#D85A30;--coral-light:#FAECE7;--purple:#534AB7;--purple-light:#EEEDFE;
-  --border:rgba(28,26,20,.1);--radius:16px;--radius-sm:10px
-}
-html{scroll-behavior:smooth}
-body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;overflow-x:hidden}
-nav{position:sticky;top:0;z-index:100;background:rgba(253,250,244,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font-family:"Fraunces",serif;font-size:22px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px;text-decoration:none}
-.logo-dot{width:10px;height:10px;border-radius:50%;background:var(--amber);display:inline-block}
-.nav-links{display:flex;align-items:center;gap:2rem}.nav-links a{text-decoration:none;color:var(--ink-soft);font-size:15px;font-weight:500;transition:color .2s}.nav-links a:hover{color:var(--ink)}
-.btn-nav,.btn-primary,.btn-secondary,.btn-cta{border-radius:100px;font-family:"DM Sans",sans-serif;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;transition:all .2s}
-.btn-nav{background:var(--ink);color:var(--cream)!important;padding:9px 20px;font-size:14px;font-weight:700}.btn-nav:hover,.btn-primary:hover{background:#3a3830;transform:translateY(-2px)}
-.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:5rem 2rem 4rem;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 600px 400px at 20% 30%,rgba(232,160,32,.13),transparent 70%),radial-gradient(ellipse 500px 400px at 80% 70%,rgba(29,158,117,.1),transparent 70%),radial-gradient(ellipse 400px 300px at 60% 10%,rgba(83,74,183,.08),transparent 70%)}
-.badge{display:inline-flex;align-items:center;gap:6px;background:var(--amber-pale);color:#7A5210;border:1px solid rgba(232,160,32,.3);padding:6px 16px;border-radius:100px;font-size:13px;font-weight:700;letter-spacing:.02em;margin-bottom:2rem;position:relative;z-index:1;animation:fadeUp .6s ease both}
-.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--amber)}
-h1,h2,h3{font-family:"Fraunces",serif;color:var(--ink)}
-h1{font-size:clamp(44px,7vw,82px);font-weight:700;line-height:1.08;max-width:820px;position:relative;z-index:1;margin-bottom:1.5rem;animation:fadeUp .6s .1s ease both}
-h1 em,h2 em{font-style:italic;color:var(--teal)}
-.hero-sub{font-size:18px;color:var(--ink-soft);max-width:560px;line-height:1.7;position:relative;z-index:1;margin-bottom:2.5rem;animation:fadeUp .6s .2s ease both}
-.hero-ctas{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center;position:relative;z-index:1;margin-bottom:4rem;animation:fadeUp .6s .3s ease both}
-.btn-primary{background:var(--ink);color:var(--cream);padding:14px 32px;font-size:16px;font-weight:700}.btn-primary:hover{box-shadow:0 8px 24px rgba(28,26,20,.2)}
-.btn-secondary{background:transparent;color:var(--ink);padding:13px 28px;border:1.5px solid var(--border);font-size:16px;font-weight:600}.btn-secondary:hover{border-color:rgba(28,26,20,.3);background:rgba(28,26,20,.04)}
-.stats-row{display:flex;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:white;max-width:540px;width:100%;position:relative;z-index:1;animation:fadeUp .6s .4s ease both;box-shadow:0 4px 24px rgba(28,26,20,.06)}
-.stat{flex:1;padding:1.25rem 1.5rem;text-align:center;border-right:1px solid var(--border)}.stat:last-child{border-right:none}.stat-num{font-family:"Fraunces",serif;font-size:28px;font-weight:700}.stat-label{font-size:13px;color:var(--ink-muted);margin-top:2px}
-.floaters{position:absolute;inset:0;z-index:0;pointer-events:none}.floater{position:absolute;background:white;border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;font-size:13px;font-weight:600;color:var(--ink-soft);display:flex;align-items:center;gap:8px;animation:float 6s ease-in-out infinite;box-shadow:0 4px 16px rgba(28,26,20,.07)}.floater-icon{font-size:16px}.f1{top:18%;left:5%}.f2{top:30%;right:4%;animation-delay:1.5s}.f3{bottom:28%;left:6%;animation-delay:3s}.f4{bottom:20%;right:5%;animation-delay:.8s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-section{padding:6rem 2rem}.container{max-width:1080px;margin:0 auto}.section-tag{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;display:block}
-h2{font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;margin-bottom:1.25rem}h2 em{color:var(--amber)}.section-sub{font-size:17px;color:var(--ink-soft);max-width:520px;line-height:1.7;margin-bottom:3rem}
-.how,.for-section{background:var(--warm-white)}.steps-grid,.for-cards,.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
-.step-card,.testi-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:2rem;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}.step-card:hover,.testi-card:hover,.for-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(28,26,20,.08)}
-.step-num{font-family:"Fraunces",serif;font-size:56px;font-weight:700;position:absolute;top:-10px;right:14px;opacity:.06;line-height:1}.step-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:1.25rem}.amber{background:var(--amber-pale)}.teal{background:var(--teal-light)}.coral{background:var(--coral-light)}.purple{background:var(--purple-light)}
-.step-card h3{font-size:20px;font-weight:600;margin-bottom:.6rem}.step-card p,.for-card p{font-size:14px;color:var(--ink-soft);line-height:1.65}
-.features{background:var(--cream)}.features-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}.feature-list{display:flex;flex-direction:column;gap:1.5rem}.feature-item{display:flex;gap:1rem;align-items:flex-start}.feature-check{width:28px;height:28px;border-radius:50%;background:var(--teal-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}.feature-check svg{width:14px;height:14px;stroke:var(--teal);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}.feature-text h4{font-weight:700;font-size:16px;margin-bottom:4px}.feature-text p{font-size:14px;color:var(--ink-soft);line-height:1.6}
-.feature-visual{background:white;border:1px solid var(--border);border-radius:20px;padding:2rem;overflow:hidden;box-shadow:0 8px 32px rgba(28,26,20,.06)}.lesson-preview{display:flex;flex-direction:column;gap:12px}.lesson-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--cream);transition:all .2s}.lesson-row.active{background:var(--amber-pale);border-color:rgba(232,160,32,.3)}.lesson-row:hover{background:white;box-shadow:0 4px 12px rgba(28,26,20,.06)}.lesson-icon{font-size:18px}.lesson-info{flex:1}.lesson-title{font-size:14px;font-weight:700}.lesson-sub{font-size:12px;color:var(--ink-muted)}.lesson-pill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px}.pill-done{background:var(--teal-light);color:var(--teal)}.pill-active{background:var(--amber-light);color:#7A5210}.pill-next{background:#F1EFE8;color:var(--ink-muted)}.progress-bar-wrap{margin-top:1.5rem;background:#F1EFE8;border-radius:100px;height:8px;overflow:hidden}.progress-bar{height:100%;background:var(--teal);border-radius:100px;width:62%}.progress-label{font-size:12px;color:var(--ink-muted);margin-top:8px}
-.for-card{border-radius:var(--radius);padding:2.5rem 2rem;border:1px solid var(--border);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}.for-card.students{background:var(--purple-light);border-color:rgba(83,74,183,.2)}.for-card.parents{background:var(--teal-light);border-color:rgba(29,158,117,.2)}.for-card.teachers{background:var(--coral-light);border-color:rgba(216,90,48,.2)}.for-label{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem;display:block}.students .for-label{color:var(--purple)}.parents .for-label{color:var(--teal)}.teachers .for-label{color:var(--coral)}.for-card h3{font-size:24px;font-weight:700;margin-bottom:.75rem}.for-big{font-size:80px;line-height:1;position:absolute;bottom:8px;right:16px;opacity:.15}
-.curriculum-section{background:var(--warm-white)}.unit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}.unit-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;box-shadow:0 6px 22px rgba(28,26,20,.05)}.unit-top{display:flex;align-items:center;gap:12px;margin-bottom:1rem}.unit-icon{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;background:var(--amber-pale)}.unit-card h3{font-size:21px}.unit-card p{font-size:14px;color:var(--ink-soft);line-height:1.65;margin-bottom:1rem}.unit-list{display:flex;flex-direction:column;gap:8px}.unit-list span{font-size:13px;color:var(--ink-soft);background:var(--cream);border:1px solid var(--border);border-radius:999px;padding:7px 11px}.subjects-section{background:var(--cream)}.subject-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}.subject-chip{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;text-align:center;font-weight:800;color:var(--ink);box-shadow:0 4px 18px rgba(28,26,20,.04)}.subject-chip span{display:block;font-size:28px;margin-bottom:8px}.faq-section{background:var(--warm-white)}.faq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}.faq-item{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}.faq-item h3{font-size:19px;margin-bottom:.5rem}.faq-item p{font-size:14px;color:var(--ink-soft);line-height:1.65}
 .testimonials{background:var(--cream)}.testi-card{padding:1.75rem}.stars{color:var(--amber);font-size:13px;margin-bottom:.75rem;letter-spacing:2px}.testi-quote{font-size:15px;color:var(--ink-soft);line-height:1.7;margin-bottom:1.25rem;font-style:italic}.testi-author{display:flex;align-items:center;gap:10px}.testi-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}.av1{background:var(--purple-light);color:var(--purple)}.av2{background:var(--teal-light);color:var(--teal)}.av3{background:var(--amber-pale);color:#7A5210}.testi-name{font-size:14px;font-weight:700}.testi-role{font-size:12px;color:var(--ink-muted)}
 .cta-section{background:var(--ink);color:var(--cream);text-align:center;padding:7rem 2rem}.cta-section .section-tag{color:rgba(253,250,244,.35)}.cta-section h2{color:var(--cream)}.cta-section p{color:rgba(253,250,244,.65);margin:0 auto 2.5rem;max-width:440px;font-size:17px;line-height:1.7}.btn-cta{background:var(--amber);color:var(--ink);padding:16px 40px;font-size:17px;font-weight:800}.btn-cta:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(232,160,32,.35)}
 footer{background:var(--ink);border-top:1px solid rgba(253,250,244,.08);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}.footer-logo{font-family:"Fraunces",serif;font-size:18px;color:var(--cream);font-weight:700}.footer-links{display:flex;gap:2rem}.footer-links a{color:rgba(253,250,244,.45);font-size:13px;text-decoration:none;transition:color .2s}.footer-links a:hover{color:rgba(253,250,244,.85)}.footer-copy{color:rgba(253,250,244,.35);font-size:13px}
@@ -98,3 +48,124 @@ footer{background:var(--ink);border-top:1px solid rgba(253,250,244,.08);padding:
     </div>
   </div>
 </section>
+<section class="features" id="features">
+  <div class="container">
+    <div class="features-layout">
+      <div>
+        <span class="section-tag">What you get</span>
+        <h2>Everything a learner <em>needs</em></h2>
+        <p class="section-sub">Built for students working independently, with a parent-friendly path behind it.</p>
+        <div class="feature-list">
+          <div class="feature-item"><div class="feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><div class="feature-text"><h4>Organized units</h4><p>Math starts with place value, then multiplication and division, then addition mastery.</p></div></div>
+          <div class="feature-item"><div class="feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><div class="feature-text"><h4>Student-first lessons</h4><p>Questions are short, clear, and designed for a child working without a teacher beside them.</p></div></div>
+          <div class="feature-item"><div class="feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><div class="feature-text"><h4>Progress map</h4><p>Locked nodes, scores, moods, and summaries make learning feel like a guided path.</p></div></div>
+          <div class="feature-item"><div class="feature-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><div class="feature-text"><h4>Local saving</h4><p>Student profile and math progress save in the browser with no account required.</p></div></div>
+        </div>
+      </div>
+      <div class="feature-visual">
+        <div style="font-size:13px;font-weight:700;color:var(--ink-muted);margin-bottom:1rem">Today's lessons - Grade 3 Math</div>
+        <div class="lesson-preview">
+          <div class="lesson-row"><span class="lesson-icon">&#128290;</span><div class="lesson-info"><div class="lesson-title">Place Value</div><div class="lesson-sub">Unit 1 - 25 min</div></div><span class="lesson-pill pill-done">Done</span></div>
+          <div class="lesson-row active"><span class="lesson-icon">&#10006;</span><div class="lesson-info"><div class="lesson-title">Multiplication</div><div class="lesson-sub">Unit 2 - 25 min</div></div><span class="lesson-pill pill-active">Active</span></div>
+          <div class="lesson-row"><span class="lesson-icon">&#127829;</span><div class="lesson-info"><div class="lesson-title">Division as Sharing</div><div class="lesson-sub">Unit 2 - 20 min</div></div><span class="lesson-pill pill-next">Next</span></div>
+          <div class="lesson-row"><span class="lesson-icon">&#10133;</span><div class="lesson-info"><div class="lesson-title">Addition within 1,000</div><div class="lesson-sub">Unit 3 - Speed round</div></div><span class="lesson-pill pill-next">Next</span></div>
+        </div>
+        <div class="progress-bar-wrap"><div class="progress-bar"></div></div>
+        <div class="progress-label">62% of today's plan complete - great pace.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="for-section" id="for">
+  <div class="container">
+    <span class="section-tag">Built for everyone</span>
+    <h2>Kairos works for <em>your</em> family</h2>
+    <p class="section-sub">Whether you're a student, parent, or educator, there is a place for you here.</p>
+    <div class="for-cards">
+      <div class="for-card students"><span class="for-label">For Students</span><h3>Learn with confidence</h3><p>Bite-sized lessons, friendly feedback, and a clear path that keeps moving.</p><div class="for-big">&#9999;</div></div>
+      <div class="for-card parents"><span class="for-label">For Parents</span><h3>Guide without guesswork</h3><p>A ready-made path that shows what your student has completed and what comes next.</p><div class="for-big">&#127969;</div></div>
+      <div class="for-card teachers"><span class="for-label">For Educators</span><h3>Supplement your classroom</h3><p>Simple activities and question sets that can support independent practice.</p><div class="for-big">&#127891;</div></div>
+    </div>
+  </div>
+</section>
+<section class="curriculum-section" id="curriculum">
+  <div class="container">
+    <span class="section-tag">Curriculum map</span>
+    <h2>A growing path for <em>Grade 3 Math</em></h2>
+    <p class="section-sub">Kairos is organized by units, then daily lessons. Students complete one node at a time and automatically unlock what comes next.</p>
+    <div class="unit-grid">
+      <div class="unit-card">
+        <div class="unit-top"><div class="unit-icon">&#128290;</div><h3>Unit 1: Place Value</h3></div>
+        <p>Students build number sense with ones, tens, hundreds, thousands, expanded form, comparing, and rounding.</p>
+        <div class="unit-list"><span>5 lessons</span><span>50 questions</span><span>3 attempts per question</span></div>
+      </div>
+      <div class="unit-card">
+        <div class="unit-top"><div class="unit-icon">&#10006;</div><h3>Unit 2: Multiplication & Division</h3></div>
+        <p>Students learn equal groups, arrays, sharing, fact families, and beginner word problems.</p>
+        <div class="unit-list"><span>5 lessons</span><span>50 questions</span><span>Hints and explanations</span></div>
+      </div>
+      <div class="unit-card">
+        <div class="unit-top"><div class="unit-icon">&#10133;</div><h3>Unit 3: Addition Mastery</h3></div>
+        <p>Students practice addition within 1,000 and build fluency through short, focused practice.</p>
+        <div class="unit-list"><span>1 lesson started</span><span>Speed-round metadata</span><span>More lessons coming</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="subjects-section">
+  <div class="container">
+    <span class="section-tag">More courses planned</span>
+    <h2>One dashboard for <em>every subject</em></h2>
+    <p class="section-sub">Math is the first working course. The dashboard is being shaped so students can later see Bible, Social Studies, ASL, Science, Reading, and more.</p>
+    <div class="subject-strip">
+      <div class="subject-chip"><span>&#128290;</span>Math</div>
+      <div class="subject-chip"><span>&#128214;</span>Reading</div>
+      <div class="subject-chip"><span>&#127759;</span>Social Studies</div>
+      <div class="subject-chip"><span>&#129504;</span>Science</div>
+      <div class="subject-chip"><span>&#9995;</span>ASL</div>
+      <div class="subject-chip"><span>&#10013;</span>Bible</div>
+    </div>
+  </div>
+</section>
+<section class="testimonials" id="about">
+  <div class="container">
+    <span class="section-tag">What families say</span>
+    <h2>Real support for <em>real</em> learning</h2>
+    <p class="section-sub" style="margin-bottom:2.5rem">Kairos is being built for families who need learning to feel clear, calm, and doable.</p>
+    <div class="testi-grid">
+      <div class="testi-card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-quote">"The path makes it so much easier to know what to do next."</p><div class="testi-author"><div class="testi-avatar av1">S</div><div><div class="testi-name">Student view</div><div class="testi-role">Simple and focused</div></div></div></div>
+      <div class="testi-card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-quote">"I like that the questions are quick and the feedback is immediate."</p><div class="testi-author"><div class="testi-avatar av2">P</div><div><div class="testi-name">Parent view</div><div class="testi-role">Progress is visible</div></div></div></div>
+      <div class="testi-card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-quote">"The unit structure is clear enough to build on one week at a time."</p><div class="testi-author"><div class="testi-avatar av3">L</div><div><div class="testi-name">Learning path</div><div class="testi-role">Organized by unit</div></div></div></div>
+    </div>
+  </div>
+</section>
+<section class="faq-section">
+  <div class="container">
+    <span class="section-tag">Quick answers</span>
+    <h2>Built to be <em>simple</em></h2>
+    <p class="section-sub">Kairos is still growing, but the goal is clear: a free curriculum site that is easy for kids to use and easy for families to understand.</p>
+    <div class="faq-grid">
+      <div class="faq-item"><h3>Does progress save?</h3><p>Yes. The student profile, unlocked lessons, XP, scores, and mood save in the browser with local storage.</p></div>
+      <div class="faq-item"><h3>Is it free?</h3><p>Yes. The site is designed to be free and accessible through GitHub Pages.</p></div>
+      <div class="faq-item"><h3>What happens after a lesson?</h3><p>Students get a summary screen with score, accuracy, XP, mood, and question breakdown.</p></div>
+      <div class="faq-item"><h3>Can more grades be added?</h3><p>Yes. The structure can grow into Grade 2, Grade 4, and more courses as the curriculum expands.</p></div>
+    </div>
+  </div>
+</section>
+<section class="cta-section">
+  <div class="container">
+    <span class="section-tag">Get started</span>
+    <h2>Start learning for <em>free</em> today</h2>
+    <p>No credit card. No catch. Just open, learn, and grow.</p>
+    <a class="btn-cta" href="kairos.html">Explore the curriculum</a>
+  </div>
+</section>
+<footer>
+  <div class="footer-logo">Kairos</div>
+  <div class="footer-links"><a href="kairos.html">Curriculum</a><a href="#for">For Parents</a><a href="#about">About</a><a href="#how">How it works</a><a href="kairos.html">Start</a></div>
+  <div class="footer-copy">© 2026 Kairos. Free education for all.</div>
+</footer>
+</body>
+</html>
+
+
