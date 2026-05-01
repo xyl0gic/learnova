@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnova - Grade 3</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F5F1E6;--card:#FFFFFF;--text:#0F2A1D;--muted:#4F7C6A;--primary:#0F2A1D;--primary-dark:#07150E;--accent:#D6B25E;--accent-dark:#B8933D;--secondary:#4F7C6A;--secondary-dark:#315545;--border:rgba(15,42,29,.15);--border-d:rgba(15,42,29,.28);--success:#4F7C6A;--success-pale:#E4EFE5;--danger:#D36135;--danger-pale:#FBE4DA;--warning:#D6B25E;--warning-pale:#F6E9C5;--ink:var(--text);--ink-soft:var(--muted);--ink-muted:rgba(15,42,29,.48);--white:var(--card);--green:var(--primary);--green-d:var(--primary-dark);--green-pale:var(--success-pale);--blue:var(--secondary);--blue-d:var(--secondary-dark);--blue-pale:#E5F0EC;--red:var(--danger);--red-d:#A84325;--red-pale:var(--danger-pale);--orange:var(--accent);--orange-pale:var(--warning-pale);--purple:var(--secondary);--purple-pale:#E8EFEA;--gold:var(--accent)}
+[data-theme="ink"]{--bg:#EEF2F6;--card:#FFFFFF;--text:#172033;--muted:#59677E;--primary:#172033;--primary-dark:#0A0F19;--accent:#5271FF;--accent-dark:#3651C8;--secondary:#3D7EA6;--secondary-dark:#255575;--border:rgba(23,32,51,.14);--border-d:rgba(23,32,51,.3);--success:#3D7EA6;--success-pale:#E0EDF5;--danger:#B94A48;--danger-pale:#F7DEDD;--warning:#D8A545;--warning-pale:#F7EBCF;--ink:var(--text);--ink-soft:var(--muted);--ink-muted:rgba(23,32,51,.48);--white:var(--card);--green:var(--primary);--green-d:var(--primary-dark);--green-pale:var(--success-pale);--blue:var(--accent);--blue-d:var(--accent-dark);--blue-pale:#E4E9FF;--red:var(--danger);--red-d:#8A302E;--red-pale:var(--danger-pale);--orange:var(--warning);--orange-pale:var(--warning-pale);--purple:var(--secondary);--purple-pale:#E0EDF5;--gold:var(--accent)}
+[data-theme="neon"]{--bg:#080A12;--card:#111827;--text:#F4F7FB;--muted:#A7B0C0;--primary:#7CFFCB;--primary-dark:#30B989;--accent:#FFE66D;--accent-dark:#D1B743;--secondary:#79A7FF;--secondary-dark:#4B72CC;--border:rgba(244,247,251,.16);--border-d:rgba(244,247,251,.32);--success:#7CFFCB;--success-pale:#17382F;--danger:#FF6B6B;--danger-pale:#3A1E27;--warning:#FFE66D;--warning-pale:#3A3320;--ink:var(--text);--ink-soft:var(--muted);--ink-muted:rgba(244,247,251,.5);--white:var(--card);--green:var(--primary);--green-d:var(--primary-dark);--green-pale:var(--success-pale);--blue:var(--secondary);--blue-d:var(--secondary-dark);--blue-pale:#1A2946;--red:var(--danger);--red-d:#C74848;--red-pale:var(--danger-pale);--orange:var(--accent);--orange-pale:var(--warning-pale);--purple:var(--secondary);--purple-pale:#1A2946;--gold:var(--accent)}
+body{font-family:"Nunito","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden}
+.screen{display:none;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem}.screen.active{display:flex}
+#screen-onboard,#screen-summary{background:linear-gradient(160deg,var(--bg) 0%,var(--blue-pale) 100%)}
+.onboard-logo{font-size:52px;margin-bottom:.5rem}
+.onboard-title{font-size:clamp(28px,5vw,42px);font-weight:900;text-align:center;line-height:1.15;margin-bottom:.5rem}
+.onboard-title em{color:var(--green);font-style:normal}
+.onboard-sub{font-size:16px;color:var(--ink-soft);text-align:center;max-width:360px;margin-bottom:2.5rem;line-height:1.6}
+.name-input-wrap{display:flex;flex-direction:column;gap:12px;width:100%;max-width:340px;margin-bottom:2rem}
+.name-input-wrap label{font-weight:700;font-size:15px}
+.name-input,.avatar-select{padding:14px 18px;border:2px solid var(--border-d);border-radius:16px;font-family:inherit;font-size:16px;font-weight:600;outline:none;background:var(--white);color:var(--ink)}
+.name-input:focus,.avatar-select:focus{border-color:var(--blue)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border-radius:16px;border:none;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;transition:transform .1s,box-shadow .1s;text-decoration:none}
+.btn:active{transform:translateY(3px)!important;box-shadow:0 1px 0!important}
+.btn-green{background:var(--green);color:var(--card);box-shadow:0 4px 0 var(--green-d)}
+.btn-green:hover{opacity:.92}
+.btn-blue{background:var(--blue);color:var(--card);box-shadow:0 4px 0 var(--blue-d)}
+.btn-outline{background:var(--white);color:var(--ink);border:2px solid var(--border-d);box-shadow:0 4px 0 var(--border-d)}
+.btn-lg{padding:16px 36px;font-size:18px;border-radius:24px;width:100%;max-width:340px}
+.btn-disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
+#screen-map{background:linear-gradient(180deg,var(--bg) 0%,var(--blue-pale) 100%);justify-content:flex-start;padding-top:0}
+.map-header{width:100%;background:var(--white);border-bottom:2px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.map-logo{font-weight:900;font-size:20px;color:var(--green)}.map-logo span{color:var(--ink)}
+.streak-badge,.xp-badge{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:100px;font-size:14px;font-weight:700}
+.streak-badge{background:var(--orange-pale);color:var(--text)}.xp-badge{background:var(--purple-pale);color:var(--text)}
+.map-body{width:100%;max-width:420px;padding:2rem 1rem 4rem;display:flex;flex-direction:column;align-items:center}
+.unit-header-card{width:100%;border-radius:24px;padding:1.5rem;margin-bottom:1.5rem;text-align:center}
+.unit-header-card h2{font-size:22px;font-weight:900;color:var(--card);margin-bottom:4px}
+.unit-header-card p{font-size:14px;color:rgba(255,255,255,.9)}
+.map-path{display:flex;flex-direction:column;align-items:center;width:100%}
+.map-node-wrap{display:flex;flex-direction:column;align-items:center}
+.map-connector{width:4px;height:28px;border-radius:4px}
+.mc-done{background:var(--green)}.mc-locked{background:var(--border-d)}
+.map-node{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:transform .15s;border:none;font-family:inherit}
+.map-node:not(.locked):hover{transform:scale(1.08)}.map-node:not(.locked):active{transform:scale(.95)}
+.node-done{background:var(--green);box-shadow:0 5px 0 var(--green-d);color:var(--card)}
+.node-active{background:var(--blue);box-shadow:0 5px 0 var(--blue-d);color:var(--card);animation:pulse 2s infinite}
+.node-locked{background:var(--border);box-shadow:0 5px 0 var(--border-d);color:var(--ink-muted);cursor:not-allowed}
+@keyframes pulse{0%,100%{box-shadow:0 5px 0 var(--blue-d)}50%{box-shadow:0 5px 14px rgba(0,0,0,.2),0 5px 0 var(--blue-d)}}
+.node-label{font-size:12px;font-weight:700;color:var(--ink-soft);margin-top:6px;text-align:center;max-width:100px;line-height:1.3}
+.unit-complete-banner{border-radius:24px;padding:1.5rem;text-align:center;width:100%;margin-top:2rem}
+.unit-complete-banner h3{font-size:20px;font-weight:900;margin-bottom:4px}
+.unit-complete-banner p{font-size:14px;color:var(--ink-soft);margin-bottom:1rem}
+.profile-header{display:flex;align-items:center;gap:14px;padding:16px;background:var(--primary);color:var(--bg);border-radius:14px;width:100%;max-width:420px;margin-bottom:18px;box-shadow:0 6px 0 var(--primary-dark)}
+.avatar{font-size:34px;background:rgba(255,255,255,.12);width:56px;height:56px;display:flex;align-items:center;justify-content:center;border-radius:14px;flex-shrink:0}
+.profile-text h2{margin:0;font-size:18px;line-height:1.2}.profile-text p{margin:2px 0 0;font-size:12px;opacity:.75}
+#screen-lesson{background:var(--bg);justify-content:flex-start;padding:0}
+.lesson-topbar{width:100%;background:var(--white);border-bottom:2px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:50}
+.back-btn{background:none;border:none;cursor:pointer;font-size:22px;color:var(--ink-soft);padding:4px;line-height:1;border-radius:8px}
+.progress-bar-outer{flex:1;height:14px;background:var(--border);border-radius:100px;overflow:hidden}
+.progress-bar-inner{height:100%;background:var(--green);border-radius:100px;transition:width .4s}
+.hearts{display:flex;gap:4px}.heart{font-size:20px;transition:transform .2s}.heart.lost{filter:grayscale(1);opacity:.3;transform:scale(.8)}
+.lesson-body{flex:1;width:100%;max-width:640px;margin:0 auto;padding:2rem 1.5rem;display:flex;flex-direction:column}
+.q-type-label{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem}
+.q-text{font-size:clamp(18px,3.5vw,24px);font-weight:800;line-height:1.4;margin-bottom:.5rem}
+.q-emoji{font-size:56px;text-align:center;margin-bottom:1.25rem}
+.choices{display:flex;flex-direction:column;gap:12px;margin-bottom:2rem}
+.choice-btn{padding:16px 20px;border-radius:16px;border:2px solid var(--border-d);background:var(--white);font-family:inherit;font-size:16px;font-weight:700;color:var(--ink);cursor:pointer;text-align:left;transition:all .15s;display:flex;align-items:center;gap:12px;box-shadow:0 4px 0 var(--border)}
+.choice-btn:not(.disabled):hover{border-color:var(--blue);background:var(--blue-pale);transform:translateX(3px)}
+.choice-btn.selected{border-color:var(--blue);background:var(--blue-pale)}
+.choice-btn.correct{border-color:var(--green);background:var(--green-pale)}
+.choice-btn.wrong{border-color:var(--red);background:var(--red-pale)}
+.choice-key{width:34px;height:34px;border-radius:10px;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;transition:all .15s}
+.choice-btn.selected .choice-key{background:var(--blue);color:var(--card)}
+.choice-btn.correct .choice-key{background:var(--green);color:var(--card)}
+.choice-btn.wrong .choice-key{background:var(--red);color:var(--card)}
+.typed-wrap{margin-bottom:2rem}
+.typed-input{width:100%;padding:16px 20px;border:2px solid var(--border-d);border-radius:16px;font-family:inherit;font-size:20px;font-weight:700;outline:none;background:var(--white);color:var(--ink);box-shadow:0 4px 0 var(--border)}
+.typed-input:focus{border-color:var(--blue)}
+.typed-input.correct{border-color:var(--green);background:var(--green-pale)}
+.typed-input.wrong{border-color:var(--red);background:var(--red-pale);animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.feedback-banner{border-radius:16px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:12px;animation:slideUp .25s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.feedback-banner.correct{background:var(--green-pale);border:2px solid var(--green)}
+.feedback-banner.wrong{background:var(--red-pale);border:2px solid var(--red)}
+.feedback-banner.maxed{background:var(--orange-pale);border:2px solid var(--orange)}
+.fb-icon{font-size:24px;flex-shrink:0;margin-top:1px}.fb-title{font-size:15px;font-weight:800;margin-bottom:2px}.fb-body{font-size:14px;color:var(--ink-soft);line-height:1.5}
+.action-row{display:flex;justify-content:flex-end;gap:10px;margin-top:auto;padding-top:1rem}
+.attempts-row{display:flex;gap:6px;margin-bottom:1rem}
+.attempt-dot{width:10px;height:10px;border-radius:50%;background:var(--border-d)}
+.attempt-dot.used{background:var(--red)}.attempt-dot.remaining{background:var(--green)}
+.summary-trophy{font-size:80px;text-align:center;margin-bottom:.5rem;animation:pop .4s}
+@keyframes pop{0%{transform:scale(0)}80%{transform:scale(1.15)}100%{transform:scale(1)}}
+.summary-title{font-size:clamp(26px,5vw,38px);font-weight:900;text-align:center;margin-bottom:.5rem}
+.summary-sub{font-size:16px;color:var(--ink-soft);text-align:center;margin-bottom:2rem}
+.summary-stats{display:flex;gap:12px;margin-bottom:2rem;flex-wrap:wrap;justify-content:center}
+.summary-stat{background:var(--white);border:2px solid var(--border);border-radius:16px;padding:1rem 1.5rem;text-align:center;min-width:100px;box-shadow:0 4px 0 var(--border)}
+.summary-stat-num{font-size:28px;font-weight:900}
+.summary-stat-label{font-size:12px;font-weight:700;color:var(--ink-muted);letter-spacing:.04em;text-transform:uppercase}
+.summary-breakdown{width:100%;max-width:440px;background:var(--white);border:2px solid var(--border);border-radius:24px;padding:1.25rem;margin-bottom:2rem;box-shadow:0 4px 0 var(--border)}
+.sb-title{font-size:14px;font-weight:800;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem}
+.sb-row{display:flex;align-items:center;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:14px}
+.sb-row:last-child{border-bottom:none}
+.sb-q{font-weight:600;flex:1;margin-right:1rem}
+.sb-result{font-weight:800;font-size:13px;padding:3px 10px;border-radius:100px}
+.sb-correct{background:var(--green-pale);color:var(--green)}.sb-wrong{background:var(--red-pale);color:var(--red-d)}
+.summary-btns{display:flex;flex-direction:column;gap:10px;width:100%;max-width:340px}
+.theme-switcher{position:fixed;right:20px;bottom:20px;z-index:1000;display:flex;gap:8px;padding:8px;background:var(--card);border:2px solid var(--border);border-radius:999px;box-shadow:0 4px 0 var(--border)}
+.theme-switcher button{width:38px;height:38px;border:2px solid var(--border);border-radius:50%;background:var(--bg);cursor:pointer;font-size:17px;transition:transform .15s}
+.theme-switcher button:hover{transform:translateY(-2px)}
+.theme-switcher button.active-theme{border-color:var(--accent);box-shadow:0 0 0 3px var(--orange-pale)}
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--ink);color:var(--card);padding:12px 24px;border-radius:100px;font-size:15px;font-weight:700;z-index:9999;transition:transform .35s;white-space:nowrap;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:500px){.summary-stats{gap:8px}.summary-stat{padding:.75rem 1rem;min-width:80px}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="theme-switcher">
+  <button type="button" onclick="setTheme('forest')" data-theme-choice="forest" title="Forest">🌿</button>
+  <button type="button" onclick="setTheme('ink')" data-theme-choice="ink" title="Ink">🖋️</button>
+  <button type="button" onclick="setTheme('neon')" data-theme-choice="neon" title="Neon">💡</button>
+</div>
+
+<!-- ONBOARDING -->
+<div class="screen" id="screen-onboard">
+  <div class="onboard-logo">🦉</div>
+  <h1 class="onboard-title">Welcome to<br><em>Learnova!</em></h1>
+  <p class="onboard-sub">Learn math, reading & science — one fun lesson at a time.</p>
+  <div class="name-input-wrap">
+    <label for="nameInput">What's your name?</label>
+    <input class="name-input" id="nameInput" type="text" placeholder="Your first name..." maxlength="24" autocomplete="off">
+    <label for="avatarSelect">Choose your avatar</label>
+    <select class="avatar-select" id="avatarSelect">
+      <option value="🦊">🦊 Fox</option>
+      <option value="🦉">🦉 Owl</option>
+      <option value="🐻">🐻 Bear</option>
+      <option value="🐸">🐸 Frog</option>
+      <option value="🐧">🐧 Penguin</option>
+      <option value="⭐">⭐ Star</option>
+    </select>
+  </div>
+  <button class="btn btn-green btn-lg" onclick="startJourney()">Let's Go! 🚀</button>
+</div>
+
+<!-- MAP -->
+<div class="screen" id="screen-map">
+  <div class="map-header">
+    <div class="map-logo">Learn<span>ova</span></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <div class="streak-badge">🔥 <span id="streakNum">0</span></div>
+      <div class="xp-badge">⭐ <span id="xpNum">0</span> XP</div>
+    </div>
+  </div>
+  <div class="map-body" id="mapBody"></div>
+</div>
+
+<!-- LESSON -->
+<div class="screen" id="screen-lesson">
+  <div class="lesson-topbar">
+    <button class="back-btn" onclick="goToMap()" title="Back to map">✕</button>
+    <div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBar" style="width:0%"></div></div>
+    <div class="hearts" id="heartsDisplay"></div>
+  </div>
+  <div class="lesson-body" id="lessonBody"></div>
+</div>
+
+<!-- SUMMARY -->
+<div class="screen" id="screen-summary">
+  <div class="summary-trophy" id="summaryTrophy">🏆</div>
+  <div class="summary-title" id="summaryTitle">Lesson Complete!</div>
+  <div class="summary-sub" id="summarySub"></div>
+  <div class="summary-stats" id="summaryStats"></div>
+  <div class="summary-breakdown" id="summaryBreakdown"></div>
+  <div class="summary-btns">
+    <button class="btn btn-green btn-lg" onclick="goToMap()">Continue 🗺️</button>
+    <button class="btn btn-outline btn-lg" onclick="downloadSummary()">📄 Export Summary JSON</button>
+  </div>
+</div>
+
+<script>
+// ── CURRICULUM ────────────────────────────────────────
+const UPDATED_UNIT_1={unitId:"grade3_math_unit1",unitTitle:"Unit 1: Number Sense & Place Value",lessons:[{lessonId:"u1_l1",title:"What is Place Value?",icon:"🏠",objective:"Understand ones, tens, hundreds, thousands",attemptLimit:3,questions:[{q:"What does the digit 3 mean in 345?",type:"multiple_choice",options:["3 ones","3 tens","3 hundreds","3 thousands"],answer:"3 hundreds"},{q:"In 582, what is the value of 8?",type:"multiple_choice",options:["8 ones","8 tens","8 hundreds","80 hundreds"],answer:"8 tens"},{q:"Which place is the 4 in 4,321?",type:"multiple_choice",options:["ones","tens","hundreds","thousands"],answer:"thousands"},{q:"Write 250 in expanded form.",type:"text",answer:"200 + 50 + 0"},{q:"What is the value of 7 in 7,104?",type:"multiple_choice",options:["7","70","700","7000"],answer:"7000"},{q:"How many hundreds are in 900?",type:"multiple_choice",options:["9","90","900","1"],answer:"9"},{q:"Which number is greater: 321 or 312?",type:"multiple_choice",options:["321","312"],answer:"321"},{q:"What digit is in the tens place in 468?",type:"text",answer:"6"},{q:"Write 1,203 in words.",type:"text",answer:"one thousand two hundred three"},{q:"Which is correct expanded form for 405?",type:"multiple_choice",options:["400 + 0 + 5","40 + 5","4 + 0 + 5","400 + 5 + 0"],answer:"400 + 0 + 5"}]},{lessonId:"u1_l2",title:"Ones, Tens, Hundreds, Thousands",icon:"🧱",attemptLimit:3,questions:[{q:"How many tens make 100?",type:"multiple_choice",options:["10","100","1","50"],answer:"10"},{q:"How many ones are in 1 ten?",type:"multiple_choice",options:["1","10","100","1000"],answer:"10"},{q:"What comes after hundreds?",type:"multiple_choice",options:["ones","tens","thousands","millions"],answer:"thousands"},{q:"Value of 9 in 9,000?",type:"text",answer:"9000"},{q:"How many hundreds in 1,000?",type:"multiple_choice",options:["10","100","1","5"],answer:"10"},{q:"Which is bigger place value?",type:"multiple_choice",options:["ones","tens","hundreds","thousands"],answer:"thousands"},{q:"Write 600 + 30 + 4 as a number",type:"text",answer:"634"},{q:"Digit in hundreds place of 742?",type:"text",answer:"7"},{q:"What is 1 thousand equal to?",type:"multiple_choice",options:["10 hundreds","100 tens","1000 ones","all correct"],answer:"all correct"},{q:"Is 2,000 greater than 1,999?",type:"multiple_choice",options:["yes","no"],answer:"yes"}]},{lessonId:"u1_l3",title:"Expanded Form",icon:"➕",attemptLimit:3,questions:[{q:"Expanded form of 123?",type:"text",answer:"100 + 20 + 3"},{q:"Expanded form of 450?",type:"text",answer:"400 + 50 + 0"},{q:"Expanded form of 908?",type:"text",answer:"900 + 0 + 8"},{q:"What is 300 + 40 + 5?",type:"text",answer:"345"},{q:"Expanded form of 1,002?",type:"text",answer:"1000 + 0 + 0 + 2"},{q:"What is missing in 500 + __ + 2 = 532?",type:"text",answer:"30"},{q:"Expanded form of 610?",type:"text",answer:"600 + 10 + 0"},{q:"Which is expanded form?",type:"multiple_choice",options:["50+2","520","5+20","500+20"],answer:"500+20"},{q:"Expanded form of 777?",type:"text",answer:"700 + 70 + 7"},{q:"Is 400+0+6 = 406?",type:"multiple_choice",options:["yes","no"],answer:"yes"}]},{lessonId:"u1_l4",title:"Comparing Numbers",icon:"⚖️",attemptLimit:3,questions:[{q:"Which is greater: 345 or 354?",type:"multiple_choice",options:["345","354"],answer:"354"},{q:"Compare: 500 __ 499 (use >, < or =)",type:"text",answer:">"},{q:"Compare: 120 __ 120 (use >, < or =)",type:"text",answer:"="},{q:"Which is smallest: 900, 890, 910?",type:"multiple_choice",options:["900","890","910"],answer:"890"},{q:"Compare: 1,000 __ 999 (use >, < or =)",type:"text",answer:">"},{q:"Which number is largest?",type:"multiple_choice",options:["234","243","432","423"],answer:"432"},{q:"Compare: 76 __ 67 (use >, < or =)",type:"text",answer:">"},{q:"Is 1,200 greater than 1,020?",type:"multiple_choice",options:["yes","no"],answer:"yes"},{q:"Which is smaller: 305 or 350?",type:"multiple_choice",options:["305","350"],answer:"305"},{q:"Compare: 888 __ 889 (use >, < or =)",type:"text",answer:"<"}]},{lessonId:"u1_l5",title:"Rounding Numbers",icon:"🎯",attemptLimit:3,questions:[{q:"Round 34 to nearest 10",type:"text",answer:"30"},{q:"Round 76 to nearest 10",type:"text",answer:"80"},{q:"Round 250 to nearest 100",type:"text",answer:"300"},{q:"Round 149 to nearest 100",type:"text",answer:"100"},{q:"Round 501 to nearest 100",type:"text",answer:"500"},{q:"Round 999 to nearest 100",type:"text",answer:"1000"},{q:"Round 62 to nearest 10",type:"text",answer:"60"},{q:"Round 85 to nearest 10",type:"text",answer:"90"},{q:"Round 430 to nearest 100",type:"text",answer:"400"},{q:"Round 650 to nearest 100",type:"text",answer:"700"}]}]};
+const UPDATED_UNIT_2={unitId:"grade3_math_unit2",unitTitle:"Unit 2: Multiplication & Division",lessons:[{lessonId:"u2_l1",title:"What is Multiplication?",icon:"✖️",attemptLimit:3,questions:[{q:"What does 3 × 2 mean?",type:"multiple_choice",options:["3 + 2","3 groups of 2","3 - 2","32"],answer:"3 groups of 2"},{q:"What is 2 × 4?",type:"text",answer:"8"},{q:"What is 5 × 3?",type:"text",answer:"15"},{q:"Which shows repeated addition?",type:"multiple_choice",options:["3 + 3 + 3","3 - 3","3 ÷ 3"],answer:"3 + 3 + 3"},{q:"4 × 1 = ?",type:"text",answer:"4"},{q:"2 × 6 = ?",type:"text",answer:"12"},{q:"3 × 3 = ?",type:"text",answer:"9"},{q:"What is 10 × 2?",type:"text",answer:"20"},{q:"Is multiplication repeated addition?",type:"multiple_choice",options:["True","False"],answer:"True"},{q:"5 × 0 = ?",type:"text",answer:"0"}]},{lessonId:"u2_l2",title:"Arrays & Equal Groups",icon:"🧩",attemptLimit:3,questions:[{q:"An array of 3 rows of 4 equals?",type:"text",answer:"12"},{q:"2 rows of 5 equals?",type:"text",answer:"10"},{q:"What is an array?",type:"multiple_choice",options:["random numbers","rows and columns","division method"],answer:"rows and columns"},{q:"4 × 3 = ?",type:"text",answer:"12"},{q:"6 × 2 = ?",type:"text",answer:"12"},{q:"3 × 5 = ?",type:"text",answer:"15"},{q:"Which shows 2 × 3?",type:"multiple_choice",options:["2+2+2","3+3","2-3"],answer:"2+2+2"},{q:"Array of 5 rows of 1 equals?",type:"text",answer:"5"},{q:"Do arrays help visualize multiplication?",type:"multiple_choice",options:["True","False"],answer:"True"},{q:"4 × 4 = ?",type:"text",answer:"16"}]},{lessonId:"u2_l3",title:"Division as Sharing",icon:"🍕",attemptLimit:3,questions:[{q:"12 ÷ 3 = ?",type:"text",answer:"4"},{q:"10 ÷ 2 = ?",type:"text",answer:"5"},{q:"Division means...",type:"multiple_choice",options:["adding","sharing equally","multiplying"],answer:"sharing equally"},{q:"15 ÷ 5 = ?",type:"text",answer:"3"},{q:"8 ÷ 4 = ?",type:"text",answer:"2"},{q:"6 ÷ 3 = ?",type:"text",answer:"2"},{q:"20 ÷ 5 = ?",type:"text",answer:"4"},{q:"Is division repeated subtraction?",type:"multiple_choice",options:["True","False"],answer:"True"},{q:"9 ÷ 3 = ?",type:"text",answer:"3"},{q:"12 ÷ 6 = ?",type:"text",answer:"2"}]},{lessonId:"u2_l4",title:"Fact Families",icon:"🔗",attemptLimit:3,questions:[{q:"Fact family for 2, 3, 6 includes?",type:"multiple_choice",options:["2+3=6","2×3=6","2-3=6"],answer:"2×3=6"},{q:"What is 4 × 5?",type:"text",answer:"20"},{q:"Fact families use which operations?",type:"multiple_choice",options:["+, -, ×, ÷","only +","only ×"],answer:"+, -, ×, ÷"},{q:"What is missing: 3 × __ = 12",type:"text",answer:"4"},{q:"What is 12 ÷ 4?",type:"text",answer:"3"},{q:"Fact families help us...",type:"multiple_choice",options:["memorize unrelated facts","see number relationships","skip math"],answer:"see number relationships"},{q:"2 × 6 = ?",type:"text",answer:"12"},{q:"12 ÷ 2 = ?",type:"text",answer:"6"},{q:"Are fact families connected equations?",type:"multiple_choice",options:["True","False"],answer:"True"},{q:"3 × 3 = ?",type:"text",answer:"9"}]},{lessonId:"u2_l5",title:"Word Problems",icon:"🧠",attemptLimit:3,questions:[{q:"You have 3 bags with 4 apples each. Total?",type:"text",answer:"12"},{q:"12 cookies shared among 3 kids. Each gets?",type:"text",answer:"4"},{q:"What operation means 'groups of'?",type:"multiple_choice",options:["addition","multiplication","subtraction"],answer:"multiplication"},{q:"20 ÷ 5 = ?",type:"text",answer:"4"},{q:"2 × 7 = ?",type:"text",answer:"14"},{q:"Division is used when we...",type:"multiple_choice",options:["combine groups","share equally","multiply bigger"],answer:"share equally"},{q:"3 × 6 = ?",type:"text",answer:"18"},{q:"10 ÷ 2 = ?",type:"text",answer:"5"},{q:"Do word problems use real life math?",type:"multiple_choice",options:["True","False"],answer:"True"},{q:"4 × 4 = ?",type:"text",answer:"16"}]}]};
+const UPDATED_UNIT_3={unitId:"grade3_math_unit3",unitTitle:"Unit 3: Addition & Subtraction Mastery",lessons:[{lessonId:"u3_l1",title:"Addition within 1,000",icon:"➕",attemptLimit:3,questions:[{q:"245 + 123 = ?",type:"text",answer:"368"},{q:"400 + 300 = ?",type:"text",answer:"700"},{q:"150 + 250 = ?",type:"text",answer:"400"},{q:"What is 99 + 1?",type:"text",answer:"100"},{q:"600 + 200 = ?",type:"text",answer:"800"},{q:"321 + 100 = ?",type:"text",answer:"421"},{q:"500 + 500 = ?",type:"text",answer:"1000"},{q:"10 + 90 = ?",type:"text",answer:"100"},{q:"234 + 10 = ?",type:"text",answer:"244"},{q:"111 + 111 = ?",type:"text",answer:"222"}]},{lessonId:"u3_l2",title:"Subtraction within 1,000",icon:"➖",attemptLimit:3,questions:[{q:"500 - 200 = ?",type:"text",answer:"300"},{q:"432 - 100 = ?",type:"text",answer:"332"},{q:"800 - 300 = ?",type:"text",answer:"500"},{q:"1000 - 1 = ?",type:"text",answer:"999"},{q:"750 - 250 = ?",type:"text",answer:"500"},{q:"600 - 150 = ?",type:"text",answer:"450"},{q:"Which is 900 - 400?",type:"multiple_choice",options:["400","450","500","550"],answer:"500"},{q:"321 - 21 = ?",type:"text",answer:"300"},{q:"222 - 111 = ?",type:"text",answer:"111"},{q:"Which is 700 - 350?",type:"multiple_choice",options:["250","300","350","400"],answer:"350"}]}]};
+
+// ── HELPERS ───────────────────────────────────────────
+function explainQuestion(q){
+  const t=q.q.toLowerCase();
+  if(t.includes("round"))return"5 or more rounds up, 4 or less stays down.";
+  if(t.includes("expanded"))return"Expanded form breaks a number into each digit's value.";
+  if(t.includes("compare")||t.includes("greater")||t.includes("smaller")||t.includes("largest")||t.includes("smallest"))return"Compare from the biggest place value first.";
+  if(t.includes("array")||t.includes("rows"))return"Arrays show equal rows and columns for multiplication.";
+  if(t.includes("division")||t.includes("÷")||t.includes("shared"))return"Division means sharing equally into equal groups.";
+  if(t.includes("fact famil"))return"Fact families show connected × and ÷ with the same numbers.";
+  if(t.includes("groups of")||t.includes("×")||t.includes("multiplication"))return"Multiplication is repeated addition with equal groups.";
+  if(t.includes("+")||t.includes("addition"))return"Add by place value: ones, then tens, then hundreds.";
+  if(t.includes("place")||t.includes("value")||t.includes("hundreds")||t.includes("tens")||t.includes("thousands"))return"Place value tells what a digit is worth based on its position.";
+  return"Think about the math model from this lesson and try again.";
+}
+
+function normalizeAnswer(v){
+  return String(v).toLowerCase().replace(/,/g,"").replace(/\s*\+\s*/g,"+").replace(/\s+/g," ").trim();
+}
+
+// FIX 1: MCQ answer matching — find index by value, fallback to 0
+function normalizeQuestion(q){
+  if(q.type==="multiple_choice"){
+    const idx=q.options.findIndex(o=>normalizeAnswer(o)===normalizeAnswer(q.answer));
+    return{type:"mcq",text:q.q,emoji:"",choices:q.options,answer:idx<0?0:idx,hint:explainQuestion(q)};
+  }
+  return{type:"typed",text:q.q,emoji:"",answer:String(q.answer),hint:explainQuestion(q)};
+}
+
+function buildUnit(rawUnit,id,title,description){
+  return{
+    id,title,description,
+    color:"var(--primary)",
+    lessons:rawUnit.lessons.map((l,i)=>({
+      id:l.lessonId,
+      title:l.title,
+      emoji:l.icon||"📖",
+      xp:25+i*5,
+      questions:l.questions.map(normalizeQuestion)
+    }))
+  };
+}
+
+// Build CURRICULUM from updated units
+const CURRICULUM={units:[
+  buildUnit(UPDATED_UNIT_1,"u1","Number Sense & Place Value","Place value, expanded form, comparing & rounding"),
+  buildUnit(UPDATED_UNIT_2,"u2","Multiplication & Division","Equal groups, arrays, fact families & word problems"),
+  buildUnit(UPDATED_UNIT_3,"u3","Addition & Subtraction Mastery","Adding and subtracting within 1,000")
+]};
+
+// ── THEME ─────────────────────────────────────────────
+function setTheme(t){
+  document.documentElement.setAttribute("data-theme",t==="forest"?"":t);
+  if(t==="forest")document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme",t);
+  localStorage.setItem("ln_theme",t);
+  document.querySelectorAll("[data-theme-choice]").forEach(b=>b.classList.toggle("active-theme",b.dataset.themeChoice===t));
+}
+function loadTheme(){setTheme(localStorage.getItem("ln_theme")||"forest");}
+
+// ── AVATAR ────────────────────────────────────────────
+function getAvatar(){return localStorage.getItem("ln_avatar")||"🦊";}
+
+// ── STATE & PROGRESS ──────────────────────────────────
+const SK="learnova_g3_v2";
+let state=null,session={lessonId:null,unitId:null,qIndex:0,attempts:0,hearts:3,results:[],answered:false,selectedChoice:null};
+
+function loadState(){try{state=JSON.parse(localStorage.getItem(SK));}catch(e){state=null;}}
+function saveState(){localStorage.setItem(SK,JSON.stringify(state));}
+function initState(name){
+  state={name,xp:0,streak:0,lastDate:null,completedLessons:{}};
+  saveState();
+}
+
+// FIX 2: Unlock logic — first lesson of first unit always unlocked
+function isUnlocked(unitIdx,lessonIdx){
+  if(unitIdx===0&&lessonIdx===0)return true;
+  if(lessonIdx===0){
+    // first lesson of later unit: all prev unit lessons done
+    return CURRICULUM.units[unitIdx-1].lessons.every(l=>!!state.completedLessons[l.id]);
+  }
+  // subsequent lessons: previous lesson done
+  const prevId=CURRICULUM.units[unitIdx].lessons[lessonIdx-1].id;
+  return !!state.completedLessons[prevId];
+}
+
+function allUnitDone(ui){
+  const u=CURRICULUM.units[ui];
+  return u&&u.lessons.every(l=>!!state.completedLessons[l.id]);
+}
+
+// ── SCREEN ROUTER ─────────────────────────────────────
+function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById("screen-"+id).classList.add("active");}
+
+function boot(){
+  loadTheme();
+  loadState();
+  if(!state){showScreen("onboard");return;}
+  updateStreak();
+  showScreen("map");
+  renderMap();
+}
+
+// ── ONBOARDING ────────────────────────────────────────
+document.getElementById("nameInput").addEventListener("keydown",e=>{if(e.key==="Enter")startJourney();});
+function startJourney(){
+  const name=document.getElementById("nameInput").value.trim();
+  if(!name){toast("Please enter your name! 😊");return;}
+  const av=document.getElementById("avatarSelect").value;
+  localStorage.setItem("ln_avatar",av);
+  initState(name);
+  updateStreak();
+  showScreen("map");
+  renderMap();
+}
+
+// ── STREAK ────────────────────────────────────────────
+function updateStreak(){
+  if(!state)return;
+  const today=new Date().toDateString();
+  if(state.lastDate!==today){
+    const yest=new Date();yest.setDate(yest.getDate()-1);
+    if(state.lastDate===yest.toDateString())state.streak=(state.streak||0)+1;
+    else if(!state.lastDate)state.streak=0;
+    state.lastDate=today;
+    saveState();
+  }
+}
+
+// ── MAP ───────────────────────────────────────────────
+function renderMap(){
+  document.getElementById("streakNum").textContent=state.streak||0;
+  document.getElementById("xpNum").textContent=state.xp||0;
+  const body=document.getElementById("mapBody");
+  body.innerHTML=`<div class="profile-header">
+    <div class="avatar">${getAvatar()}</div>
+    <div class="profile-text"><h2>Hi, ${state.name}! 👋</h2><p>Grade 3 Math Path</p></div>
+  </div>`;
+
+  CURRICULUM.units.forEach((unit,ui)=>{
+    // Unit header
+    const uh=document.createElement("div");
+    uh.className="unit-header-card";
+    uh.style.background=ui%2===0?"var(--primary)":"var(--secondary)";
+    uh.style.boxShadow=`0 6px 0 ${ui%2===0?"var(--primary-dark)":"var(--secondary-dark)"}`;
+    uh.innerHTML=`<h2>Unit ${ui+1}: ${unit.title}</h2><p>${unit.description}</p>`;
+    body.appendChild(uh);
+
+    const path=document.createElement("div");
+    path.className="map-path";
+
+    unit.lessons.forEach((lesson,li)=>{
+      const done=!!state.completedLessons[lesson.id];
+      const unlocked=isUnlocked(ui,li);
+
+      if(li>0){
+        const conn=document.createElement("div");
+        const prevDone=!!state.completedLessons[unit.lessons[li-1].id];
+        conn.className="map-connector "+(prevDone?"mc-done":"mc-locked");
+        path.appendChild(conn);
+      }
+
+      const wrap=document.createElement("div");
+      wrap.className="map-node-wrap";
+
+      const node=document.createElement("button");
+      node.className=`map-node ${done?"node-done":unlocked?"node-active":"node-locked"}`;
+      if(!unlocked)node.classList.add("locked");
+      node.textContent=done?"✓":unlocked?lesson.emoji:"🔒";
+      if(unlocked||done)node.onclick=()=>startLesson(unit.id,lesson.id);
+
+      const label=document.createElement("div");
+      label.className="node-label";
+      label.style.color=done?"var(--primary)":unlocked?"var(--secondary)":"var(--ink-muted)";
+      label.textContent=lesson.title;
+
+      // Score badge if done
+      if(done&&state.completedLessons[lesson.id]){
+        const sc=state.completedLessons[lesson.id];
+        const badge=document.createElement("div");
+        badge.style.cssText="font-size:11px;font-weight:700;color:var(--primary);margin-top:3px;opacity:.7;";
+        badge.textContent=`${sc.accuracy}%`;
+        wrap.appendChild(node);
+        wrap.appendChild(label);
+        wrap.appendChild(badge);
+      } else {
+        wrap.appendChild(node);
+        wrap.appendChild(label);
+      }
+      path.appendChild(wrap);
+    });
+
+    body.appendChild(path);
+
+    if(allUnitDone(ui)){
+      const banner=document.createElement("div");
+      banner.className="unit-complete-banner";
+      banner.style.background="var(--gold)";
+      banner.style.boxShadow="0 6px 0 var(--accent-dark)";
+      banner.innerHTML=`<h3>🎉 Unit ${ui+1} Complete!</h3><p>All lessons mastered.</p>
+        <button class="btn btn-outline" style="margin:0 auto;display:flex" onclick="showUnitSummary('${unit.id}')">📊 View Summary</button>`;
+      body.appendChild(banner);
+    }
+
+    const sp=document.createElement("div");sp.style.height="2rem";body.appendChild(sp);
+  });
+}
+
+// ── LESSON ────────────────────────────────────────────
+function startLesson(unitId,lessonId){
+  const unit=CURRICULUM.units.find(u=>u.id===unitId);
+  if(!unit)return;
+  const lesson=unit.lessons.find(l=>l.id===lessonId);
+  if(!lesson)return;
+  session={unitId,lessonId,qIndex:0,attempts:0,hearts:3,results:[],answered:false,selectedChoice:null};
+  showScreen("lesson");
+  renderQuestion(lesson);
+}
+
+function getLessonData(){
+  const unit=CURRICULUM.units.find(u=>u.id===session.unitId);
+  return unit?unit.lessons.find(l=>l.id===session.lessonId):null;
+}
+
+function goToMap(){showScreen("map");renderMap();}
+
+function renderHearts(){
+  const el=document.getElementById("heartsDisplay");
+  el.innerHTML="";
+  for(let i=0;i<3;i++){
+    const h=document.createElement("span");
+    h.className="heart"+(i>=session.hearts?" lost":"");
+    h.textContent="❤️";
+    el.appendChild(h);
+  }
+}
+
+function renderQuestion(lesson){
+  const q=lesson.questions[session.qIndex];
+  const total=lesson.questions.length;
+  document.getElementById("progressBar").style.width=(session.qIndex/total*100)+"%";
+  renderHearts();
+  session.answered=false;
+  session.selectedChoice=null;
+  session.attempts=0;
+
+  const body=document.getElementById("lessonBody");
+  body.innerHTML="";
+
+  const typeLabel=document.createElement("div");
+  typeLabel.className="q-type-label";
+  typeLabel.textContent=q.type==="mcq"?"Choose the correct answer":"Type your answer";
+  body.appendChild(typeLabel);
+
+  if(q.emoji){
+    const em=document.createElement("div");em.className="q-emoji";em.textContent=q.emoji;body.appendChild(em);
+  }
+
+  const qt=document.createElement("div");qt.className="q-text";qt.textContent=q.text;body.appendChild(qt);
+
+  // Attempt dots
+  const attRow=document.createElement("div");
+  attRow.className="attempts-row";attRow.id="attemptsRow";
+  for(let i=0;i<3;i++){const d=document.createElement("div");d.className="attempt-dot remaining";attRow.appendChild(d);}
+  body.appendChild(attRow);
+
+  const fb=document.createElement("div");fb.id="feedbackArea";body.appendChild(fb);
+
+  if(q.type==="mcq")renderMCQ(q,body);else renderTyped(q,body);
+}
+
+function renderMCQ(q,body){
+  const wrap=document.createElement("div");wrap.className="choices";
+  const keys=["A","B","C","D"];
+  q.choices.forEach((c,i)=>{
+    const btn=document.createElement("button");
+    btn.className="choice-btn";
+    btn.innerHTML=`<span class="choice-key">${keys[i]||i+1}</span>${c}`;
+    btn.onclick=()=>selectChoice(i);
+    wrap.appendChild(btn);
+  });
+  body.appendChild(wrap);
+  const ar=document.createElement("div");ar.className="action-row";ar.id="actionRow";
+  const cb=document.createElement("button");cb.className="btn btn-green btn-disabled";cb.id="checkBtn";cb.textContent="Check ✓";cb.onclick=()=>submitMCQ(q);
+  ar.appendChild(cb);body.appendChild(ar);
+}
+
+function selectChoice(idx){
+  if(session.answered)return;
+  session.selectedChoice=idx;
+  document.querySelectorAll(".choice-btn").forEach((b,i)=>b.classList.toggle("selected",i===idx));
+  const cb=document.getElementById("checkBtn");
+  if(cb)cb.classList.remove("btn-disabled");
+}
+
+function renderTyped(q,body){
+  const wrap=document.createElement("div");wrap.className="typed-wrap";
+  const inp=document.createElement("input");
+  inp.className="typed-input";inp.id="typedInput";inp.type="text";
+  inp.placeholder="Type your answer here...";inp.autocomplete="off";
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter")submitTyped(q);});
+  wrap.appendChild(inp);body.appendChild(wrap);
+  const ar=document.createElement("div");ar.className="action-row";ar.id="actionRow";
+  const cb=document.createElement("button");cb.className="btn btn-blue";cb.textContent="Check ✓";cb.onclick=()=>submitTyped(q);
+  ar.appendChild(cb);body.appendChild(ar);
+  setTimeout(()=>inp.focus(),50);
+}
+
+function submitMCQ(q){
+  if(session.answered||session.selectedChoice===null)return;
+  const correct=session.selectedChoice===q.answer;
+  // Mark choices visually first
+  document.querySelectorAll(".choice-btn").forEach((b,i)=>{
+    if(i===q.answer)b.classList.add("correct");
+    else if(i===session.selectedChoice&&!correct)b.classList.add("wrong");
+    b.classList.add("disabled");b.onclick=null;
+  });
+  handleAnswer(correct,q,String(session.selectedChoice));
+}
+
+function submitTyped(q){
+  if(session.answered)return;
+  const inp=document.getElementById("typedInput");
+  if(!inp)return;
+  const val=inp.value.trim();
+  if(!val){toast("Type something first! ✏️");return;}
+  const correct=normalizeAnswer(val)===normalizeAnswer(q.answer);
+  if(correct){inp.classList.add("correct");}
+  else{inp.classList.add("wrong");setTimeout(()=>{if(inp)inp.classList.remove("wrong");},400);}
+  handleAnswer(correct,q,val);
+  if(correct||session.attempts>=2)inp.disabled=true; // disable after correct or last attempt
+}
+
+function handleAnswer(correct,q,given){
+  session.attempts++;
+  updateAttemptDots();
+  if(correct){
+    session.answered=true;
+    session.results.push({correct:true,attempts:session.attempts,answerGiven:given,question:q.text,correctAnswer:String(q.answer)});
+    showFeedback("correct","🎉 Correct!","");
+    replaceCheckWithNext();
+  } else if(session.attempts>=3){
+    session.answered=true;
+    session.hearts=Math.max(0,session.hearts-1);
+    renderHearts();
+    session.results.push({correct:false,attempts:session.attempts,answerGiven:given,question:q.text,correctAnswer:String(q.answer)});
+    const correctText=q.type==="mcq"?q.choices[q.answer]:q.answer;
+    showFeedback("maxed","😬 Nice try!",`The correct answer was: <strong>${correctText}</strong>`);
+    replaceCheckWithNext();
+  } else {
+    session.hearts=Math.max(0,session.hearts-1);
+    renderHearts();
+    showFeedback("wrong","Not quite! 🤔",q.hint?`Hint: ${q.hint}`:`Try again! ${3-session.attempts} attempt${3-session.attempts!==1?"s":""} left.`);
+    if(q.type==="mcq"){
+      session.selectedChoice=null;
+      document.querySelectorAll(".choice-btn").forEach(b=>{
+        b.classList.remove("selected","correct","wrong","disabled");
+        b.onclick=(_i=>()=>selectChoice(_i))(Array.from(document.querySelectorAll(".choice-btn")).indexOf(b));
+      });
+      // Re-attach onclick properly
+      document.querySelectorAll(".choice-btn").forEach((b,i)=>{b.onclick=()=>selectChoice(i);});
+      const cb=document.getElementById("checkBtn");if(cb)cb.classList.add("btn-disabled");
+    } else {
+      const inp=document.getElementById("typedInput");
+      if(inp){inp.disabled=false;inp.value="";inp.focus();}
+    }
+  }
+}
+
+function updateAttemptDots(){
+  document.querySelectorAll("#attemptsRow .attempt-dot").forEach((d,i)=>{
+    d.className="attempt-dot "+(i<session.attempts?"used":"remaining");
+  });
+}
+
+function showFeedback(type,title,msg){
+  const area=document.getElementById("feedbackArea");
+  if(!area)return;
+  const icons={correct:"✅",wrong:"❌",maxed:"💡"};
+  area.innerHTML=`<div class="feedback-banner ${type}"><span class="fb-icon">${icons[type]}</span><div><div class="fb-title">${title}</div><div class="fb-body">${msg}</div></div></div>`;
+}
+
+function replaceCheckWithNext(){
+  const ar=document.getElementById("actionRow");if(!ar)return;
+  const lesson=getLessonData();if(!lesson)return;
+  const isLast=session.qIndex>=lesson.questions.length-1;
+  ar.innerHTML="";
+  const btn=document.createElement("button");
+  btn.className="btn btn-green";
+  btn.textContent=isLast?"Finish 🏁":"Next →";
+  btn.onclick=isLast?finishLesson:nextQuestion;
+  ar.appendChild(btn);
+}
+
+function nextQuestion(){session.qIndex++;renderQuestion(getLessonData());}
+
+// ── FINISH ────────────────────────────────────────────
+function finishLesson(){
+  const lesson=getLessonData();
+  const unit=CURRICULUM.units.find(u=>u.id===session.unitId);
+  if(!lesson||!unit)return;
+  const correct=session.results.filter(r=>r.correct).length;
+  const total=session.results.length;
+  const accuracy=total>0?Math.round((correct/total)*100):0;
+  const xpEarned=Math.round((lesson.xp||20)*(accuracy/100));
+
+  state.completedLessons[lesson.id]={score:correct,total,accuracy,xpEarned,date:new Date().toLocaleDateString()};
+  state.xp=(state.xp||0)+xpEarned;
+  updateStreak();
+  if(allUnitDone(CURRICULUM.units.indexOf(unit)))buildUnitSummary(unit);
+  saveState();
+  showSummaryScreen(lesson,unit,correct,total,accuracy,xpEarned);
+}
+
+function buildUnitSummary(unit){
+  const s={unitId:unit.id,unitTitle:unit.title,student:state.name,completedDate:new Date().toLocaleDateString(),
+    lessons:unit.lessons.map(l=>{const r=state.completedLessons[l.id]||{};return{lessonId:l.id,title:l.title,...r};}),
+    totalXP:unit.lessons.reduce((a,l)=>a+(state.completedLessons[l.id]?.xpEarned||0),0),
+    averageAccuracy:Math.round(unit.lessons.reduce((a,l)=>a+(state.completedLessons[l.id]?.accuracy||0),0)/unit.lessons.length)
+  };
+  if(!state.summaries)state.summaries=[];
+  const idx=state.summaries.findIndex(x=>x.unitId===unit.id);
+  idx>=0?state.summaries[idx]=s:state.summaries.push(s);
+}
+
+function showSummaryScreen(lesson,unit,correct,total,accuracy,xpEarned){
+  const mood=accuracy===100?"excited":accuracy>=70?"happy":accuracy>=50?"neutral":"coach";
+  const moodCopy={excited:"Perfect score — you crushed it!",happy:"Great work, keep it up!",neutral:"Good effort. A little review will help.",coach:"No stress. Let's slow down and practice."};
+  const trophy=mood==="excited"?"🏆":mood==="happy"?"⭐":mood==="neutral"?"📘":"💡";
+  const title=mood==="excited"?"Amazing Score!":mood==="happy"?"Great Work!":mood==="neutral"?"Lesson Done!":"Keep Practicing!";
+  document.getElementById("summaryTrophy").textContent=trophy;
+  document.getElementById("summaryTitle").textContent=title;
+  document.getElementById("summarySub").textContent=`${lesson.title} — ${moodCopy[mood]}`;
+  document.getElementById("summaryStats").innerHTML=`
+    <div class="summary-stat"><div class="summary-stat-num">${correct}/${total}</div><div class="summary-stat-label">Correct</div></div>
+    <div class="summary-stat"><div class="summary-stat-num">${accuracy}%</div><div class="summary-stat-label">Accuracy</div></div>
+    <div class="summary-stat"><div class="summary-stat-num">+${xpEarned}</div><div class="summary-stat-label">XP Earned</div></div>`;
+  let bd=`<div class="sb-title">Question Breakdown</div>`;
+  session.results.forEach((r,i)=>{
+    const q=r.question.length>40?r.question.slice(0,40)+"…":r.question;
+    bd+=`<div class="sb-row"><div class="sb-q">Q${i+1}: ${q}</div><span class="sb-result ${r.correct?"sb-correct":"sb-wrong"}">${r.correct?"✓ Correct":"✗ Wrong"}</span></div>`;
+  });
+  document.getElementById("summaryBreakdown").innerHTML=bd;
+  window._lastSummaryExport={student:state.name,lessonId:lesson.id,lessonTitle:lesson.title,unitTitle:unit.title,date:new Date().toLocaleDateString(),score:correct,total,accuracy,xpEarned,breakdown:session.results};
+  showScreen("summary");
+}
+
+function downloadSummary(){
+  const data=window._lastSummaryExport||{};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download=`learnova_${(data.lessonId||"summary")}.json`;a.click();
+  toast("Summary exported! 📄");
+}
+
+function showUnitSummary(unitId){
+  if(!state.summaries){toast("No summary yet!");return;}
+  const s=state.summaries.find(x=>x.unitId===unitId);
+  if(!s){toast("No summary yet!");return;}
+  window._lastSummaryExport=s;downloadSummary();
+}
+
+// ── TOAST ─────────────────────────────────────────────
+let _tt=null;
+function toast(msg){
+  const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");
+  if(_tt)clearTimeout(_tt);_tt=setTimeout(()=>el.classList.remove("show"),2500);
+}
+
+boot();
+</script>
+</body>
+</html>
